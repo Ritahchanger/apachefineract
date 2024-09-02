@@ -12,10 +12,10 @@ const Home = () => {
 
   const getFineractData = async () => {
     try {
-      const response = await axios.get(
-        "/fineract-provider/api/v1/groups?paged=true"
-      );
-      setGroups(response.data.pageItems || items);
+      // const response = await axios.get(
+      //   "/fineract-provider/api/v1/groups?paged=true"
+      // );
+      setGroups(items);
     } catch (error) {
       setError(error);
       setGroups(items); // Set fallback data on error
@@ -49,7 +49,9 @@ const Home = () => {
           {loading ? (
             <div className="loading-spinner">Loading...</div>
           ) : error ? (
-            <div className="error-message">Error fetching data: {error.message}</div>
+            <div className="error-message">
+              Error fetching data: {error.message}
+            </div>
           ) : (
             <>
               <table>
@@ -94,7 +96,9 @@ const Home = () => {
               </table>
             </>
           )}
-          <button onClick={handleLogout} className="logout-button">Logout</button>
+          <button onClick={handleLogout} className="logout-button">
+            Logout
+          </button>
         </div>
       </div>
     </div>
