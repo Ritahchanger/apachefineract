@@ -17,7 +17,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch("/fineract-provider/api/v1/authentication", {
+      const response = await fetch("https://demo.mifos.io/fineract-provider/api/v1/authentication", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
