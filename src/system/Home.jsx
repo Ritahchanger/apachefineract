@@ -11,7 +11,7 @@ const Home = () => {
 
   const getFineractData = async () => {
     try {
-      const response = await axios.get("/fineract-provider/api/v1/groups?paged=true");
+      const response = await axios.get("https://demo.mifos.io/fineract-provider/api/v1/groups?paged=true");
       setGroups(response.data.pageItems);
     } catch (error) {
       setError(error);
