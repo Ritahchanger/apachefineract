@@ -1,0 +1,42 @@
+.authentication{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    flex-direction: column;
+    height:100vh;
+
+}
+.authentication .login{
+    
+    max-width:600px;
+    width:90%;
+    padding:10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.25);
+    margin-top:10px;
+}
+
+.title{
+    color:#ff004f;
+    font-size:17px;
+    font-weight:600;
+    text-transform: uppercase;
+
+}
+.authentication .login input{
+    border:none;
+    margin:10px 0px;
+    width:100%;
+    border-bottom:1px solid #ababab;
+    padding:10px;
+    outline:none;
+}
+.authentication .login input[type="submit"]{
+    border:none;
+    padding:0.7rem;
+    background:#ff004f;
+    color: #fff;
+    font-weight:500;
+    cursor: pointer;
+    letter-spacing:2px;
+}
