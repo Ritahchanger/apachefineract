@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./home.css";
 import axios from "axios";
-
 import items from "./data";
 
 const Home = () => {
@@ -14,13 +13,14 @@ const Home = () => {
   const getFineractData = async () => {
     try {
       const response = await axios.get(
-        "https://demo.mifos.io/fineract-provider/api/v1/groups?paged=true"
+        "/fineract-provider/api/v1/groups?paged=true"
       );
       setGroups(response.data.pageItems || items);
     } catch (error) {
       setError(error);
+      setGroups(items); // Set fallback data on error
     } finally {
-      setLoading(false);
+      setLoading(false); // Ensure loading is set to false after either success or failure
     }
   };
 
@@ -47,26 +47,26 @@ const Home = () => {
       <div className="custom-dashboard">
         <div className="table-wrapper">
           {loading ? (
-            <p>Loading...</p>
+            <div className="loading-spinner">Loading...</div>
           ) : error ? (
-            <p>Error fetching data: {error.message}</p>
+            <div className="error-message">Error fetching data: {error.message}</div>
           ) : (
             <>
               <table>
                 <thead>
                   <tr>
-                    <td>ID</td>
-                    <td>Name</td>
-                    <td>Active</td>
-                    <td>Office ID</td>
-                    <td>Office Name</td>
-                    <td>Hierarchy</td>
-                    <td>Group Level</td>
-                    <td>Status</td>
-                    <td>Submitted Date</td>
-                    <td>Submitted By</td>
-                    <td>Activated Date</td>
-                    <td>Activated By</td>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Active</th>
+                    <th>Office ID</th>
+                    <th>Office Name</th>
+                    <th>Hierarchy</th>
+                    <th>Group Level</th>
+                    <th>Status</th>
+                    <th>Submitted Date</th>
+                    <th>Submitted By</th>
+                    <th>Activated Date</th>
+                    <th>Activated By</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -75,11 +75,11 @@ const Home = () => {
                       <td>{group.id}</td>
                       <td>{group.name}</td>
                       <td>{group.active ? "Yes" : "No"}</td>
-                      <td>{group.officeId}</td>
-                      <td>{group.officeName}</td>
-                      <td>{group.hierarchy}</td>
-                      <td>{group.groupLevel}</td>
-                      <td>{group.status.value}</td>
+                      <td>{group.officeId || "N/A"}</td>
+                      <td>{group.officeName || "N/A"}</td>
+                      <td>{group.hierarchy || "N/A"}</td>
+                      <td>{group.groupLevel || "N/A"}</td>
+                      <td>{group.status?.value || "N/A"}</td>
                       <td>
                         {group.timeline?.submittedOnDate?.join("-") || "N/A"}
                       </td>
@@ -94,7 +94,7 @@ const Home = () => {
               </table>
             </>
           )}
-          <button onClick={handleLogout}>Logout</button>
+          <button onClick={handleLogout} className="logout-button">Logout</button>
         </div>
       </div>
     </div>
