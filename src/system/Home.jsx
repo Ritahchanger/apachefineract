@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import "./home.css";
 import axios from "axios";
 
+import items from "./data";
+
 const Home = () => {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,8 +13,10 @@ const Home = () => {
 
   const getFineractData = async () => {
     try {
-      const response = await axios.get("https://demo.mifos.io/fineract-provider/api/v1/groups?paged=true");
-      setGroups(response.data.pageItems);
+      const response = await axios.get(
+        "https://demo.mifos.io/fineract-provider/api/v1/groups?paged=true"
+      );
+      setGroups(response.data.pageItems || items);
     } catch (error) {
       setError(error);
     } finally {
@@ -76,9 +80,13 @@ const Home = () => {
                       <td>{group.hierarchy}</td>
                       <td>{group.groupLevel}</td>
                       <td>{group.status.value}</td>
-                      <td>{group.timeline?.submittedOnDate?.join('-') || "N/A"}</td>
+                      <td>
+                        {group.timeline?.submittedOnDate?.join("-") || "N/A"}
+                      </td>
                       <td>{group.timeline?.submittedByUsername || "N/A"}</td>
-                      <td>{group.timeline?.activatedOnDate?.join('-') || "N/A"}</td>
+                      <td>
+                        {group.timeline?.activatedOnDate?.join("-") || "N/A"}
+                      </td>
                       <td>{group.timeline?.activatedByUsername || "N/A"}</td>
                     </tr>
                   ))}
